@@ -30,6 +30,8 @@ public class Framey extends Frame implements ActionListener {
 
     setSize(250, 250);
     setVisible(true);
+
+    startAutoClicker();
   }
 
   public static void main(String[] args) {
@@ -38,8 +40,30 @@ public class Framey extends Frame implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    numCookies += 1;
+    incrementCounter(1);
+  }
+
+  private void incrementCounter (int inc) {
+    numCookies += inc;
     cookieText.setText(numCookies.toString());
   }
 
+  private void startAutoClicker () {
+    Thread thread = new Thread () {
+      @Override
+      public void run()
+      {
+        while (true) {
+          try {
+            sleep(1000);
+          } catch (InterruptedException e) {
+            return;
+          }
+          incrementCounter(1);
+        }
+      }
+    };
+    thread.setDaemon(true);
+    thread.run();
+  }
 }
