@@ -1,27 +1,34 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import victory.windowy.VicWindowListener;
 
 
 public class Framey extends Frame implements ActionListener {
 
+  private Button btn;
+  private TextField cookieText;
+  Integer numCookies = 0;
+
   private static final long serialVersionUID = 1L;
 
   Framey () {
     setLayout(new FlowLayout());
     setTitle("Framey Thing");
-    Button btn = new Button("press me");
+    btn = new Button("Cookie");
+    btn.addActionListener(this);
     add(btn);
+
+
+    cookieText = new TextField(numCookies.toString(), 5);
+    cookieText.setEditable(false);
+    cookieText.setText(numCookies.toString());
+    add(cookieText);
+
+    addWindowListener(new VicWindowListener());
+
     setSize(250, 250);
-    //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    WindowListener windowListener = new VicWindowListener();
-
-    addWindowListener(windowListener);
     setVisible(true);
   }
 
@@ -31,8 +38,8 @@ public class Framey extends Frame implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    // TODO Auto-generated method stub
-
+    numCookies += 1;
+    cookieText.setText(numCookies.toString());
   }
 
 }
