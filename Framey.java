@@ -71,8 +71,7 @@ public class Framey extends Frame implements ActionListener {
   private void startAutoClicker () {
 
     if (numAutoClickers > 0) {
-      String message = "you already have an auto clicker";
-      Sorry.sayYouAre(this, message);
+      new Sorry(this, "you already have an auto clicker");
       return;
     }
     numAutoClickers += 1;
