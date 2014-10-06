@@ -44,10 +44,16 @@ public class Framey extends Frame implements ActionListener {
 
   private void bindByAutoClicker() {
     buyAutoClicker = new Button("Buy Auto Clicker");
+    final Framey mainFrame = this;
     buyAutoClicker.addActionListener(
         new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
+            if (numCookies < 10) {
+              new Sorry(mainFrame, "you can't afford that (costs 10 cookies)");
+              return;
+            }
+            numCookies -= 10;
             // TODO Auto-generated method stub
             startAutoClicker();
           }
