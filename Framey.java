@@ -11,8 +11,9 @@ import victory.windowy.VicWindowListener;
 
 public class Framey extends Frame implements ActionListener {
 
-  private Button btn;
-  private Button buyAutoClicker;
+  private Button cookieBtn;
+  private Button buyPowerUpClickBtn;
+  private Button buyAutoClickerBtn;
 
   private TextField cookieText;
   Integer numCookies = 0;
@@ -25,18 +26,20 @@ public class Framey extends Frame implements ActionListener {
   Framey () {
     setLayout(new FlowLayout());
     setTitle("Cookie Framey Thing");
-    btn = new Button("Cookie");
-    btn.addActionListener(this);
-    add(btn);
+    cookieBtn = new Button("Cookie");
+    cookieBtn.addActionListener(this);
+    add(cookieBtn);
 
-    bindByAutoClicker();
+    buyPowerUpClickBtn = new Button("Buy Power Up Click");
+    add(buyPowerUpClickBtn);
 
     cookieText = new TextField(numCookies.toString(), 5);
     cookieText.setEditable(false);
     cookieText.setText(numCookies.toString());
     add(cookieText);
 
-    add(buyAutoClicker);
+    bindByAutoClicker();
+    add(buyAutoClickerBtn);
 
     addWindowListener(new VicWindowListener());
 
@@ -45,9 +48,9 @@ public class Framey extends Frame implements ActionListener {
   }
 
   private void bindByAutoClicker() {
-    buyAutoClicker = new Button("Buy Auto Clicker");
+    buyAutoClickerBtn = new Button("Buy Auto Clicker");
     final Framey mainFrame = this;
-    buyAutoClicker.addActionListener(
+    buyAutoClickerBtn.addActionListener(
         new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
