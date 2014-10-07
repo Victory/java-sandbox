@@ -18,11 +18,13 @@ public class Framey extends Frame implements ActionListener {
   Integer numCookies = 0;
   int numAutoClickers = 0;
 
+  static final Integer costAutoClicker = 10;
+
   private static final long serialVersionUID = 1L;
 
   Framey () {
     setLayout(new FlowLayout());
-    setTitle("Framey Thing");
+    setTitle("Cookie Framey Thing");
     btn = new Button("Cookie");
     btn.addActionListener(this);
     add(btn);
@@ -49,8 +51,11 @@ public class Framey extends Frame implements ActionListener {
         new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            if (numCookies < 10) {
-              new Sorry(mainFrame, "you can't afford that (costs 10 cookies)");
+            if (numCookies < costAutoClicker) {
+              String c = costAutoClicker.toString();
+              new Sorry(
+                  mainFrame,
+                  "you can't afford that (costs " + c + " cookies)");
               return;
             }
             numCookies -= 10;
