@@ -11,13 +11,14 @@ import victory.windowy.VicWindowListener;
 
 public class Framey extends Frame implements ActionListener {
 
-  private Integer cookiesPerClick = 1;
+  private Double cookiesPerClick = 1.0;
+  private Double costOfCookiesPerClick = 1.0;
   private Button cookieBtn;
   private Button buyPowerUpClickBtn;
   private Button buyAutoClickerBtn;
 
   private TextField cookieText;
-  Integer numCookies = 0;
+  Double numCookies = 0.0;
   int numAutoClickers = 0;
 
   static final Integer costAutoClicker = 10;
@@ -54,6 +55,15 @@ public class Framey extends Frame implements ActionListener {
     buyPowerUpClickBtn.addActionListener(new ActionListener (){
       @Override
       public void actionPerformed(ActionEvent e) {
+        if (numCookies < costOfCookiesPerClick) {
+          new Sorry(
+              mainFrame,
+              "Can't afford! Current Cost: " + costOfCookiesPerClick);
+          return;
+        }
+        numCookies -= Math.floor(costOfCookiesPerClick);
+        setCookieCount();
+        costOfCookiesPerClick = costOfCookiesPerClick * 1.2;
         cookiesPerClick += 1;
       }
     });
@@ -74,6 +84,7 @@ public class Framey extends Frame implements ActionListener {
               return;
             }
             numCookies -= 10;
+            setCookieCount();
             // TODO Auto-generated method stub
             startAutoClicker();
           }
@@ -89,9 +100,14 @@ public class Framey extends Frame implements ActionListener {
     incrementCounter(this.cookiesPerClick);
   }
 
-  private void incrementCounter (int inc) {
+  private void incrementCounter (Double inc) {
     numCookies += inc;
-    cookieText.setText(numCookies.toString());
+    setCookieCount();
+  }
+
+  private void setCookieCount () {
+    Integer c = (int) Math.round(numCookies);
+    cookieText.setText(c.toString());
   }
 
   private void startAutoClicker () {
@@ -107,7 +123,7 @@ public class Framey extends Frame implements ActionListener {
 
       @Override
       public void run() {
-        incrementCounter(1);
+        incrementCounter(1.0);
       }
     };
 
