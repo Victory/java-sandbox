@@ -15,6 +15,7 @@ public class Framey extends Frame implements ActionListener {
   private Double costOfCookiesPerClick = 1.0;
   private Button cookieBtn;
   private Button buyPowerUpClickBtn;
+  private Integer powerClickMax = 3;// max number of power clicks
   private Button buyAutoClickerBtn;
 
   private TextField cookieText;
@@ -61,6 +62,14 @@ public class Framey extends Frame implements ActionListener {
               "Can't afford! Current Cost: " + costOfCookiesPerClick);
           return;
         }
+
+        if (cookiesPerClick >= powerClickMax) {
+          new Sorry(
+              mainFrame,
+              "Sorry the limit of power clicks is " + powerClickMax);
+          return;
+        }
+
         numCookies -= Math.floor(costOfCookiesPerClick);
         setCookieCount();
         costOfCookiesPerClick = costOfCookiesPerClick * 1.2;
