@@ -96,6 +96,7 @@ public class Framey extends Frame implements ActionListener {
             setCookieCount();
             // TODO Auto-generated method stub
             startAutoClicker();
+            mainFrame.remove(buyAutoClickerBtn);
           }
         });
   }
